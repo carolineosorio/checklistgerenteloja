@@ -13,43 +13,38 @@ header{background:#fff;border-bottom:2px solid #e8ddd5;padding:16px 16px 12px;po
 .date-lbl{font-size:12px;color:#9e7e68}
 .prog-row{display:flex;align-items:center;gap:10px;margin-top:10px}
 .prog-bg{flex:1;height:8px;background:#f0e6de;border-radius:99px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,#c85a1a,#e8a060);border-radius:99px;transition:width .3s}
+.prog-fill{height:100%;background:#c85a1a;border-radius:99px;transition:width .3s}
 .prog-lbl{font-size:13px;font-weight:700;color:#c85a1a;min-width:38px;text-align:right}
 .content{max-width:600px;margin:0 auto;padding:14px 12px 0}
 .section{background:#fff;border-radius:14px;border:1px solid #e8ddd5;margin-bottom:12px;overflow:hidden}
 .sec-hd{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;user-select:none}
-.sec-hd:active{background:#fdf5f0}
-.sec-emoji{font-size:22px}
+.sec-emoji{font-size:20px}
 .sec-title{flex:1;font-size:15px;font-weight:700;color:#2d1f14}
 .sec-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px}
 .bdg-p{background:#f5ede6;color:#b5490b}
 .bdg-d{background:#e6f5ee;color:#1a8045}
-.chev{font-size:13px;color:#9e7e68;transition:transform .2s}
+.chev{font-size:13px;color:#9e7e68;transition:transform .2s;display:inline-block}
 .chev.open{transform:rotate(180deg)}
 .items{display:none}
 .items.open{display:block}
 .item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-top:1px solid #f0e6de;cursor:pointer}
-.item:active{background:#fdf5f0}
 .item.done{background:#f5fdf8}
 .item.done .itxt{color:#9e7e68;text-decoration:line-through}
-.cb{width:24px;height:24px;min-width:24px;border-radius:6px;border:2px solid #d9c4b6;background:#fff;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .15s;font-size:14px;color:#fff}
+.cb{width:24px;height:24px;min-width:24px;border-radius:6px;border:2px solid #d9c4b6;background:#fff;display:flex;align-items:center;justify-content:center;margin-top:1px;font-size:14px;color:#fff;font-weight:700}
 .item.done .cb{background:#1a8045;border-color:#1a8045}
 .itxt{font-size:14px;line-height:1.55;color:#2d1f14}
 .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;margin-left:5px;vertical-align:middle}
 .tag-warn{background:#fce8de;color:#b5490b}
 .tag-red{background:#fde8e8;color:#b51a1a}
 .block{background:#fff;border-radius:14px;border:1px solid #e8ddd5;margin-bottom:12px;padding:14px}
-.block-title{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.block-title{font-size:14px;font-weight:700;margin-bottom:12px}
 .ind-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ind-card{background:#faf7f4;border-radius:10px;padding:10px}
 .ind-label{font-size:11px;color:#9e7e68;margin-bottom:5px;font-weight:600}
 .ind-input{width:100%;border:1px solid #e8ddd5;border-radius:7px;padding:8px 10px;font-size:14px;background:#fff;color:#2d1f14;font-family:inherit}
-.ind-input:focus{outline:2px solid #c85a1a;border-color:transparent}
 textarea{width:100%;border:1px solid #e8ddd5;border-radius:8px;padding:10px;font-size:14px;color:#2d1f14;font-family:inherit;resize:vertical;line-height:1.6;background:#fff}
-textarea:focus{outline:2px solid #c85a1a;border-color:transparent}
 textarea::placeholder{color:#bca898}
-.small-label{font-size:12px;color:#9e7e68;margin:8px 0 4px;font-weight:600;display:block}
-.footer{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.footer{display:flex;gap:10px;margin-top:8px}
 .btn{padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none}
 .btn-r{background:#f0e6de;color:#b5490b;flex:1}
 .btn-p{background:#c85a1a;color:#fff;flex:2}
@@ -58,7 +53,6 @@ textarea::placeholder{color:#bca898}
 .banner-t{font-size:16px;font-weight:800;color:#1a6035}
 .banner-s{font-size:12px;color:#2d7a4a;margin-top:4px}
 .conv-full{grid-column:1/-1}
-@media print{header,.footer,.banner-s{display:none!important}.section{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -79,36 +73,124 @@ textarea::placeholder{color:#bca898}
     <div class="banner-s">Ótimo trabalho! Preencha os indicadores e o diário e envie para a Carol.</div>
   </div>
 
-  <div id="secs"></div>
-
-  <!-- Indicadores -->
-  <div class="block">
-    <div class="block-title">📊 Indicadores do dia</div>
-    <div class="ind-grid">
-      <div class="ind-card">
-        <div class="ind-label">Faturamento (R$)</div>
-        <input class="ind-input" id="fat" type="number" placeholder="0,00">
-      </div>
-      <div class="ind-card">
-        <div class="ind-label">Ticket médio (R$)</div>
-        <input class="ind-input" id="tkt" type="number" placeholder="0,00">
-      </div>
-      <div class="ind-card">
-        <div class="ind-label">Clientes que entraram</div>
-        <input class="ind-input" id="ent" type="number" placeholder="0">
-      </div>
-      <div class="ind-card">
-        <div class="ind-label">Clientes que compraram</div>
-        <input class="ind-input" id="cmp" type="number" placeholder="0">
-      </div>
-      <div class="ind-card conv-full">
-        <div class="ind-label">Por que não compraram?</div>
-        <input class="ind-input" id="conv" type="text" placeholder="Ex: produto em falta, só vieram olhar...">
-      </div>
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('ab')">
+      <span class="sec-emoji">🌅</span>
+      <span class="sec-title">Abertura</span>
+      <span class="sec-badge bdg-p" id="b-ab">0/5</span>
+      <span class="chev open" id="ch-ab">▼</span>
+    </div>
+    <div class="items open" id="its-ab">
+      <div class="item" id="i-a1" onclick="toggle('a1','ab')"><div class="cb"></div><span class="itxt">Seguir checklist de abertura e atualizar se necessário</span></div>
+      <div class="item" id="i-a2" onclick="toggle('a2','ab')"><div class="cb"></div><span class="itxt">Verificar apresentação pessoal de cada atendente: hálito, cabelo, barba e blusa <span class="tag tag-red">⚠ atenção</span></span></div>
+      <div class="item" id="i-a3" onclick="toggle('a3','ab')"><div class="cb"></div><span class="itxt">Conferir vitrine: sem buracos, produtos alinhados com identificação <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-a4" onclick="toggle('a4','ab')"><div class="cb"></div><span class="itxt">Verificar estoque dos campeões de venda — avisar produção se necessário <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-a5" onclick="toggle('a5','ab')"><div class="cb"></div><span class="itxt">Fazer briefing com a equipe: prioridades do dia e motivação</span></div>
     </div>
   </div>
 
-  <!-- Diário -->
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('at')">
+      <span class="sec-emoji">💬</span>
+      <span class="sec-title">Atendimento e Vendas</span>
+      <span class="sec-badge bdg-p" id="b-at">0/6</span>
+      <span class="chev" id="ch-at">▼</span>
+    </div>
+    <div class="items" id="its-at">
+      <div class="item" id="i-at1" onclick="toggle('at1','at')"><div class="cb"></div><span class="itxt">Acompanhar atendimentos e padronizar abordagem conforme método combinado</span></div>
+      <div class="item" id="i-at2" onclick="toggle('at2','at')"><div class="cb"></div><span class="itxt">Itens de impulso posicionados no caixa: bebidas, velas, toppers, complementos <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-at3" onclick="toggle('at3','at')"><div class="cb"></div><span class="itxt">Equipe oferecendo adicionais: morango extra, chantilly, gelatto... <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-at4" onclick="toggle('at4','at')"><div class="cb"></div><span class="itxt">Monitorar WhatsApp e orientar condução das vendas</span></div>
+      <div class="item" id="i-at5" onclick="toggle('at5','at')"><div class="cb"></div><span class="itxt">Circular pelas mesas: café quente, pedido correto, satisfação do cliente</span></div>
+      <div class="item" id="i-at6" onclick="toggle('at6','at')"><div class="cb"></div><span class="itxt">Avisar clientes quando espera ultrapassar 20 minutos <span class="tag tag-warn">⚠ atenção</span></span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('op')">
+      <span class="sec-emoji">🏪</span>
+      <span class="sec-title">Operação e Vitrine</span>
+      <span class="sec-badge bdg-p" id="b-op">0/4</span>
+      <span class="chev" id="ch-op">▼</span>
+    </div>
+    <div class="items" id="its-op">
+      <div class="item" id="i-op1" onclick="toggle('op1','op')"><div class="cb"></div><span class="itxt">Vitrine abastecida, alinhada e atrativa — verificar várias vezes ao dia <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-op2" onclick="toggle('op2','op')"><div class="cb"></div><span class="itxt">Verificar validade e aparência dos produtos em exposição <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-op3" onclick="toggle('op3','op')"><div class="cb"></div><span class="itxt">Supervisionar limpeza e organização da loja</span></div>
+      <div class="item" id="i-op4" onclick="toggle('op4','op')"><div class="cb"></div><span class="itxt">Conferir apresentação pessoal das atendentes ao longo do dia <span class="tag tag-red">⚠ atenção</span></span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('fi')">
+      <span class="sec-emoji">💰</span>
+      <span class="sec-title">Caixa e Financeiro</span>
+      <span class="sec-badge bdg-p" id="b-fi">0/4</span>
+      <span class="chev" id="ch-fi">▼</span>
+    </div>
+    <div class="items" id="its-fi">
+      <div class="item" id="i-fi1" onclick="toggle('fi1','fi')"><div class="cb"></div><span class="itxt">Confirmar que todos os consumos foram registrados no caixa</span></div>
+      <div class="item" id="i-fi2" onclick="toggle('fi2','fi')"><div class="cb"></div><span class="itxt">Realizar sangrias conforme procedimento</span></div>
+      <div class="item" id="i-fi3" onclick="toggle('fi3','fi')"><div class="cb"></div><span class="itxt">Organizar caixa no envelope com boletos para envio ao ateliê/Carol</span></div>
+      <div class="item" id="i-fi4" onclick="toggle('fi4','fi')"><div class="cb"></div><span class="itxt">Registrar faturamento e comparar com meta do dia</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('pr')">
+      <span class="sec-emoji">🎂</span>
+      <span class="sec-title">Integração com Produção</span>
+      <span class="sec-badge bdg-p" id="b-pr">0/3</span>
+      <span class="chev" id="ch-pr">▼</span>
+    </div>
+    <div class="items" id="its-pr">
+      <div class="item" id="i-pr1" onclick="toggle('pr1','pr')"><div class="cb"></div><span class="itxt">Comunicar produtos em falta ou alta demanda — campeões nunca podem faltar! <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-pr2" onclick="toggle('pr2','pr')"><div class="cb"></div><span class="itxt">Alertar sobre produtos próximos do vencimento na vitrine <span class="tag tag-red">⚠ atenção</span></span></div>
+      <div class="item" id="i-pr3" onclick="toggle('pr3','pr')"><div class="cb"></div><span class="itxt">Cobrar feedbacks de clientes às atendentes e repassar no grupo</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('eq')">
+      <span class="sec-emoji">👥</span>
+      <span class="sec-title">Equipe</span>
+      <span class="sec-badge bdg-p" id="b-eq">0/3</span>
+      <span class="chev" id="ch-eq">▼</span>
+    </div>
+    <div class="items" id="its-eq">
+      <div class="item" id="i-eq1" onclick="toggle('eq1','eq')"><div class="cb"></div><span class="itxt">Motivar e engajar o time durante o dia</span></div>
+      <div class="item" id="i-eq2" onclick="toggle('eq2','eq')"><div class="cb"></div><span class="itxt">Anotar necessidades de treinamento para reportar à Carol</span></div>
+      <div class="item" id="i-eq3" onclick="toggle('eq3','eq')"><div class="cb"></div><span class="itxt">Elaborar esboço de escala do fim de semana para aprovação da Carol (se aplicável)</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('fe')">
+      <span class="sec-emoji">🌙</span>
+      <span class="sec-title">Fechamento</span>
+      <span class="sec-badge bdg-p" id="b-fe">0/5</span>
+      <span class="chev" id="ch-fe">▼</span>
+    </div>
+    <div class="items" id="its-fe">
+      <div class="item" id="i-fe1" onclick="toggle('fe1','fe')"><div class="cb"></div><span class="itxt">Executar checklist de fechamento e atualizar se necessário</span></div>
+      <div class="item" id="i-fe2" onclick="toggle('fe2','fe')"><div class="cb"></div><span class="itxt">Fechar caixa, organizar envelope com boletos e enviar ao ateliê/Carol</span></div>
+      <div class="item" id="i-fe3" onclick="toggle('fe3','fe')"><div class="cb"></div><span class="itxt">Atualizar status do WhatsApp pensando nos dias de baixa venda</span></div>
+      <div class="item" id="i-fe4" onclick="toggle('fe4','fe')"><div class="cb"></div><span class="itxt">Preencher indicadores e diário do dia</span></div>
+      <div class="item" id="i-fe5" onclick="toggle('fe5','fe')"><div class="cb"></div><span class="itxt">Enviar resumo do dia para a Carol: faturamento, conversão e ocorrências</span></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title">📊 Indicadores do dia</div>
+    <div class="ind-grid">
+      <div class="ind-card"><div class="ind-label">Faturamento (R$)</div><input class="ind-input" id="fat" type="number" placeholder="0,00"></div>
+      <div class="ind-card"><div class="ind-label">Ticket médio (R$)</div><input class="ind-input" id="tkt" type="number" placeholder="0,00"></div>
+      <div class="ind-card"><div class="ind-label">Clientes que entraram</div><input class="ind-input" id="ent" type="number" placeholder="0"></div>
+      <div class="ind-card"><div class="ind-label">Clientes que compraram</div><input class="ind-input" id="cmp" type="number" placeholder="0"></div>
+      <div class="ind-card conv-full"><div class="ind-label">Por que não compraram?</div><input class="ind-input" id="conv" type="text" placeholder="Ex: produto em falta, só vieram olhar..."></div>
+    </div>
+  </div>
+
   <div class="block" style="border-style:dashed">
     <div class="block-title">📓 Diário do dia</div>
     <textarea id="diary" rows="4" placeholder="Dificuldades do dia, o que foi combinado e com quem, feedbacks de clientes, situações importantes para não esquecer..."></textarea>
@@ -121,120 +203,82 @@ textarea::placeholder{color:#bca898}
 </div>
 
 <script>
-const S=[
-  {id:"ab",e:"🌅",t:"Abertura",items:[
-    {id:"a1",t:"Seguir checklist de abertura e atualizar se necessário"},
-    {id:"a2",t:"Verificar apresentação pessoal de cada atendente: hálito, cabelo, barba e blusa",w:"red"},
-    {id:"a3",t:"Conferir vitrine: sem buracos, produtos alinhados com identificação",w:"warn"},
-    {id:"a4",t:"Verificar estoque dos campeões de venda — avisar produção se necessário",w:"warn"},
-    {id:"a5",t:"Fazer briefing com a equipe: prioridades do dia e motivação"},
-  ]},
-  {id:"at",e:"💬",t:"Atendimento e Vendas",items:[
-    {id:"at1",t:"Acompanhar atendimentos e padronizar abordagem conforme método combinado"},
-    {id:"at2",t:"Itens de impulso posicionados no caixa: bebidas, velas, toppers, complementos",w:"warn"},
-    {id:"at3",t:"Equipe oferecendo adicionais: morango extra, chantilly, gelatto...",w:"warn"},
-    {id:"at4",t:"Monitorar WhatsApp e orientar condução das vendas"},
-    {id:"at5",t:"Circular pelas mesas: café quente, pedido correto, satisfação do cliente"},
-    {id:"at6",t:"Avisar clientes quando espera ultrapassar 20 minutos",w:"warn"},
-  ]},
-  {id:"op",e:"🏪",t:"Operação e Vitrine",items:[
-    {id:"op1",t:"Vitrine abastecida, alinhada e atrativa — verificar várias vezes ao dia",w:"warn"},
-    {id:"op2",t:"Verificar validade e aparência dos produtos em exposição",w:"warn"},
-    {id:"op3",t:"Supervisionar limpeza e organização da loja"},
-    {id:"op4",t:"Conferir apresentação pessoal das atendentes ao longo do dia",w:"red"},
-  ]},
-  {id:"fi",e:"💰",t:"Caixa e Financeiro",items:[
-    {id:"fi1",t:"Confirmar que todos os consumos foram registrados no caixa"},
-    {id:"fi2",t:"Realizar sangrias conforme procedimento"},
-    {id:"fi3",t:"Organizar caixa no envelope com boletos para envio ao ateliê/Carol"},
-    {id:"fi4",t:"Registrar faturamento e comparar com meta do dia"},
-  ]},
-  {id:"pr",e:"🎂",t:"Integração com Produção",items:[
-    {id:"pr1",t:"Comunicar produtos em falta ou alta demanda — campeões nunca podem faltar!",w:"warn"},
-    {id:"pr2",t:"Alertar sobre produtos próximos do vencimento na vitrine",w:"red"},
-    {id:"pr3",t:"Cobrar feedbacks de clientes às atendentes e repassar no grupo"},
-  ]},
-  {id:"eq",e:"👥",t:"Equipe",items:[
-    {id:"eq1",t:"Motivar e engajar o time durante o dia"},
-    {id:"eq2",t:"Anotar necessidades de treinamento para reportar à Carol"},
-    {id:"eq3",t:"Elaborar esboço de escala do fim de semana para aprovação da Carol (se aplicável)"},
-  ]},
-  {id:"fe",e:"🌙",t:"Fechamento",items:[
-    {id:"fe1",t:"Executar checklist de fechamento e atualizar se necessário"},
-    {id:"fe2",t:"Fechar caixa, organizar envelope com boletos e enviar ao ateliê/Carol"},
-    {id:"fe3",t:"Atualizar status do WhatsApp pensando nos dias de baixa venda"},
-    {id:"fe4",t:"Preencher indicadores e diário do dia"},
-    {id:"fe5",t:"Enviar resumo do dia para a Carol: faturamento, conversão e ocorrências"},
-  ]}
-];
+var SECS = ['ab','at','op','fi','pr','eq','fe'];
+var COUNTS = {ab:5, at:6, op:4, fi:4, pr:3, eq:3, fe:5};
+var st = {};
 
-let st={};
-function sv(){try{localStorage.setItem("gcl_"+today(),JSON.stringify(st));}catch(e){}}
-function ld(){try{const d=localStorage.getItem("gcl_"+today());if(d)st=JSON.parse(d);}catch(e){}}
-function today(){return new Date().toISOString().split("T")[0];}
+function today(){ return new Date().toISOString().split('T')[0]; }
+function save(){ try{ localStorage.setItem('gcl_'+today(), JSON.stringify(st)); }catch(e){} }
+function load(){ try{ var d=localStorage.getItem('gcl_'+today()); if(d) st=JSON.parse(d); }catch(e){} }
 
-function tots(){
-  let t=0,d=0;
-  S.forEach(s=>s.items.forEach(i=>{t++;if(st[i.id])d++;}));
-  return{t,d};
+function totalItems(){
+  var t=0; SECS.forEach(function(s){ t+=COUNTS[s]; }); return t;
 }
+function totalDone(){
+  var d=0; Object.keys(st).forEach(function(k){ if(st[k]) d++; }); return d;
+}
+
 function updProg(){
-  const{t,d}=tots();
-  const p=t?Math.round(d/t*100):0;
-  document.getElementById("pf").style.width=p+"%";
-  document.getElementById("pl").textContent=p+"%";
-  document.getElementById("banner").classList.toggle("show",d===t&&t>0);
+  var t=totalItems(), d=totalDone();
+  var p=t?Math.round(d/t*100):0;
+  document.getElementById('pf').style.width=p+'%';
+  document.getElementById('pl').textContent=p+'%';
+  document.getElementById('banner').className='banner'+(d===t&&t>0?' show':'');
 }
-function updBdg(id){
-  const sec=S.find(s=>s.id===id);
-  const d=sec.items.filter(i=>st[i.id]).length,t=sec.items.length;
-  const b=document.getElementById("b-"+id);
-  b.textContent=d===t?"✓ Feito":d+"/"+t;
-  b.className="sec-badge "+(d===t?"bdg-d":"bdg-p");
+
+function updBdg(sid){
+  var total=COUNTS[sid], done=0;
+  var items=document.getElementById('its-'+sid).querySelectorAll('.item');
+  items.forEach(function(el){ if(el.classList.contains('done')) done++; });
+  var b=document.getElementById('b-'+sid);
+  b.textContent=done===total?'✓ Feito':done+'/'+total;
+  b.className='sec-badge '+(done===total?'bdg-d':'bdg-p');
 }
-function toggle(iid,sid){
-  st[iid]=!st[iid];sv();
-  document.getElementById("i-"+iid).classList.toggle("done",!!st[iid]);
-  updBdg(sid);updProg();
+
+function toggle(iid, sid){
+  st[iid]=!st[iid]; save();
+  var el=document.getElementById('i-'+iid);
+  el.classList.toggle('done', !!st[iid]);
+  el.querySelector('.cb').textContent=st[iid]?'✓':'';
+  updBdg(sid); updProg();
 }
+
 function togSec(id){
-  const el=document.getElementById("its-"+id),ch=document.getElementById("ch-"+id);
-  const o=el.classList.toggle("open");ch.classList.toggle("open",o);
+  var items=document.getElementById('its-'+id);
+  var chev=document.getElementById('ch-'+id);
+  var isOpen=items.classList.toggle('open');
+  chev.classList.toggle('open', isOpen);
 }
+
 function resetAll(){
-  if(!confirm("Iniciar novo dia? O checklist será zerado."))return;
-  st={};sv();
-  S.forEach(sec=>{
-    sec.items.forEach(it=>document.getElementById("i-"+it.id).classList.remove("done"));
-    updBdg(sec.id);
+  if(!confirm('Iniciar novo dia? O checklist será zerado.')) return;
+  st={}; save();
+  document.querySelectorAll('.item').forEach(function(el){
+    el.classList.remove('done');
+    el.querySelector('.cb').textContent='';
   });
-  ["fat","tkt","ent","cmp","conv","diary"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
-  updProg();
-}
-function render(){
-  const now=new Date();
-  document.getElementById("dtlbl").textContent=now.toLocaleDateString("pt-BR",{weekday:"short",day:"numeric",month:"short"});
-  const c=document.getElementById("secs");
-  S.forEach((sec,i)=>{
-    const d=document.createElement("div");d.className="section";
-    d.innerHTML=`<div class="sec-hd" onclick="togSec('${sec.id}')">
-      <span class="sec-emoji">${sec.e}</span>
-      <span class="sec-title">${sec.t}</span>
-      <span class="sec-badge bdg-p" id="b-${sec.id}">0/${sec.items.length}</span>
-      <span class="chev${i===0?' open':''}" id="ch-${sec.id}">▼</span>
-    </div>
-    <div class="items${i===0?' open':''}" id="its-${sec.id}">
-      ${sec.items.map(it=>`
-        <div class="item${st[it.id]?' done':''}" id="i-${it.id}" onclick="toggle('${it.id}','${sec.id}')">
-          <div class="cb">${st[it.id]?'✓':''}</div>
-          <span class="itxt">${it.t}${it.w?<span class="tag tag-${it.w}">⚠️ atenção</span>:''}</span>
-        </div>`).join("")}
-    </div>`;
-    c.appendChild(d);updBdg(sec.id);
+  SECS.forEach(function(s){ updBdg(s); });
+  ['fat','tkt','ent','cmp','conv','diary'].forEach(function(id){
+    var e=document.getElementById(id); if(e) e.value='';
   });
   updProg();
 }
-ld();render();
+
+function init(){
+  var now=new Date();
+  document.getElementById('dtlbl').textContent=now.toLocaleDateString('pt-BR',{weekday:'short',day:'numeric',month:'short'});
+  load();
+  Object.keys(st).forEach(function(iid){
+    if(st[iid]){
+      var el=document.getElementById('i-'+iid);
+      if(el){ el.classList.add('done'); el.querySelector('.cb').textContent='✓'; }
+    }
+  });
+  SECS.forEach(function(s){ updBdg(s); });
+  updProg();
+}
+
+init();
 </script>
 </body>
 </html>
