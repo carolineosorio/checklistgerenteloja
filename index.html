@@ -182,26 +182,12 @@ textarea::placeholder{color:#bca898}
     <div class="sec-hd" onclick="togSec('fe')">
       <span class="sec-emoji">🌙</span>
       <span class="sec-title">Fechamento</span>
-      <span class="sec-badge bdg-p" id="b-fe">0/5</span>
+      <span class="sec-badge bdg-p" id="b-fe">0/2</span>
       <span class="chev" id="ch-fe">▼</span>
     </div>
     <div class="items" id="its-fe">
       <div class="item" id="i-fe1" onclick="toggle('fe1','fe')"><div class="cb"></div><span class="itxt">Executar checklist de fechamento e atualizar se necessário</span></div>
-      <div class="item" id="i-fe2" onclick="toggle('fe2','fe')"><div class="cb"></div><span class="itxt">Fechar caixa, organizar envelope com boletos e enviar ao ateliê/Carol</span></div>
-      <div class="item" id="i-fe3" onclick="toggle('fe3','fe')"><div class="cb"></div><span class="itxt">Atualizar status do WhatsApp pensando nos dias de baixa venda</span></div>
-      <div class="item" id="i-fe4" onclick="toggle('fe4','fe')"><div class="cb"></div><span class="itxt">Preencher indicadores e diário do dia</span></div>
-      <div class="item" id="i-fe5" onclick="toggle('fe5','fe')"><div class="cb"></div><span class="itxt">Enviar resumo do dia para a Carol: faturamento, conversão e ocorrências</span></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-title">📊 Indicadores do dia</div>
-    <div class="ind-grid">
-      <div class="ind-card"><div class="ind-label">Faturamento (R$)</div><input class="ind-input" id="fat" type="number" placeholder="0,00"></div>
-      <div class="ind-card"><div class="ind-label">Ticket médio (R$)</div><input class="ind-input" id="tkt" type="number" placeholder="0,00"></div>
-      <div class="ind-card"><div class="ind-label">Clientes que entraram</div><input class="ind-input" id="ent" type="number" placeholder="0"></div>
-      <div class="ind-card"><div class="ind-label">Clientes que compraram</div><input class="ind-input" id="cmp" type="number" placeholder="0"></div>
-      <div class="ind-card conv-full"><div class="ind-label">Por que não compraram?</div><input class="ind-input" id="conv" type="text" placeholder="Ex: produto em falta, só vieram olhar..."></div>
+      <div class="item" id="i-fe2" onclick="toggle('fe2','fe')"><div class="cb"></div><span class="itxt">Salvar em PDF com os devidos registros importantes e enviar para a Carol</span></div>
     </div>
   </div>
 
@@ -218,7 +204,7 @@ textarea::placeholder{color:#bca898}
 
 <script>
 var SECS = ['ab','tt','at','op','fi','pr','eq','fe'];
-var COUNTS = {ab:4, tt:4, at:6, op:4, fi:4, pr:3, eq:3, fe:5};
+var COUNTS = {ab:4, tt:4, at:6, op:4, fi:4, pr:3, eq:3, fe:2};
 var st = {};
 
 function today(){ return new Date().toISOString().split('T')[0]; }
