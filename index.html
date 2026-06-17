@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist Gerente — Doceria</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#faf7f4;color:#2d1f14;padding-bottom:60px}
+header{background:#fff;border-bottom:2px solid #e8ddd5;padding:16px 16px 12px;position:sticky;top:0;z-index:10}
+.h-top{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:16px;font-weight:800;color:#b5490b}
+.date-lbl{font-size:12px;color:#9e7e68}
+.prog-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.prog-bg{flex:1;height:8px;background:#f0e6de;border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#c85a1a,#e8a060);border-radius:99px;transition:width .3s}
+.prog-lbl{font-size:13px;font-weight:700;color:#c85a1a;min-width:38px;text-align:right}
+.content{max-width:600px;margin:0 auto;padding:14px 12px 0}
+.section{background:#fff;border-radius:14px;border:1px solid #e8ddd5;margin-bottom:12px;overflow:hidden}
+.sec-hd{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;user-select:none}
+.sec-hd:active{background:#fdf5f0}
+.sec-emoji{font-size:22px}
+.sec-title{flex:1;font-size:15px;font-weight:700;color:#2d1f14}
+.sec-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px}
+.bdg-p{background:#f5ede6;color:#b5490b}
+.bdg-d{background:#e6f5ee;color:#1a8045}
+.chev{font-size:13px;color:#9e7e68;transition:transform .2s}
+.chev.open{transform:rotate(180deg)}
+.items{display:none}
+.items.open{display:block}
+.item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-top:1px solid #f0e6de;cursor:pointer}
+.item:active{background:#fdf5f0}
+.item.done{background:#f5fdf8}
+.item.done .itxt{color:#9e7e68;text-decoration:line-through}
+.cb{width:24px;height:24px;min-width:24px;border-radius:6px;border:2px solid #d9c4b6;background:#fff;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .15s;font-size:14px;color:#fff}
+.item.done .cb{background:#1a8045;border-color:#1a8045}
+.itxt{font-size:14px;line-height:1.55;color:#2d1f14}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;margin-left:5px;vertical-align:middle}
+.tag-warn{background:#fce8de;color:#b5490b}
+.tag-red{background:#fde8e8;color:#b51a1a}
+.block{background:#fff;border-radius:14px;border:1px solid #e8ddd5;margin-bottom:12px;padding:14px}
+.block-title{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.ind-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ind-card{background:#faf7f4;border-radius:10px;padding:10px}
+.ind-label{font-size:11px;color:#9e7e68;margin-bottom:5px;font-weight:600}
+.ind-input{width:100%;border:1px solid #e8ddd5;border-radius:7px;padding:8px 10px;font-size:14px;background:#fff;color:#2d1f14;font-family:inherit}
+.ind-input:focus{outline:2px solid #c85a1a;border-color:transparent}
+textarea{width:100%;border:1px solid #e8ddd5;border-radius:8px;padding:10px;font-size:14px;color:#2d1f14;font-family:inherit;resize:vertical;line-height:1.6;background:#fff}
+textarea:focus{outline:2px solid #c85a1a;border-color:transparent}
+textarea::placeholder{color:#bca898}
+.small-label{font-size:12px;color:#9e7e68;margin:8px 0 4px;font-weight:600;display:block}
+.footer{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.btn{padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none}
+.btn-r{background:#f0e6de;color:#b5490b;flex:1}
+.btn-p{background:#c85a1a;color:#fff;flex:2}
+.banner{background:#e6f5ee;border:1.5px solid #a8dfbf;border-radius:12px;padding:14px;margin-bottom:12px;text-align:center;display:none}
+.banner.show{display:block}
+.banner-t{font-size:16px;font-weight:800;color:#1a6035}
+.banner-s{font-size:12px;color:#2d7a4a;margin-top:4px}
+.conv-full{grid-column:1/-1}
+@media print{header,.footer,.banner-s{display:none!important}.section{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-top">
+    <span class="logo">🍰 Checklist Gerência</span>
+    <span class="date-lbl" id="dtlbl"></span>
+  </div>
+  <div class="prog-row">
+    <div class="prog-bg"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+    <span class="prog-lbl" id="pl">0%</span>
+  </div>
+</header>
+
+<div class="content">
+  <div id="banner" class="banner">
+    <div class="banner-t">✅ Checklist concluído!</div>
+    <div class="banner-s">Ótimo trabalho! Preencha os indicadores e o diário e envie para a Carol.</div>
+  </div>
+
+  <div id="secs"></div>
+
+  <!-- Indicadores -->
+  <div class="block">
+    <div class="block-title">📊 Indicadores do dia</div>
+    <div class="ind-grid">
+      <div class="ind-card">
+        <div class="ind-label">Faturamento (R$)</div>
+        <input class="ind-input" id="fat" type="number" placeholder="0,00">
+      </div>
+      <div class="ind-card">
+        <div class="ind-label">Ticket médio (R$)</div>
+        <input class="ind-input" id="tkt" type="number" placeholder="0,00">
+      </div>
+      <div class="ind-card">
+        <div class="ind-label">Clientes que entraram</div>
+        <input class="ind-input" id="ent" type="number" placeholder="0">
+      </div>
+      <div class="ind-card">
+        <div class="ind-label">Clientes que compraram</div>
+        <input class="ind-input" id="cmp" type="number" placeholder="0">
+      </div>
+      <div class="ind-card conv-full">
+        <div class="ind-label">Por que não compraram?</div>
+        <input class="ind-input" id="conv" type="text" placeholder="Ex: produto em falta, só vieram olhar...">
+      </div>
+    </div>
+  </div>
+
+  <!-- Diário -->
+  <div class="block" style="border-style:dashed">
+    <div class="block-title">📓 Diário do dia</div>
+    <textarea id="diary" rows="4" placeholder="Dificuldades do dia, o que foi combinado e com quem, feedbacks de clientes, situações importantes para não esquecer..."></textarea>
+  </div>
+
+  <div class="footer">
+    <button class="btn btn-r" onclick="resetAll()">↺ Novo dia</button>
+    <button class="btn btn-p" onclick="window.print()">🖨️ Salvar PDF</button>
+  </div>
+</div>
+
+<script>
+const S=[
+  {id:"ab",e:"🌅",t:"Abertura",items:[
+    {id:"a1",t:"Seguir checklist de abertura e atualizar se necessário"},
+    {id:"a2",t:"Verificar apresentação pessoal de cada atendente: hálito, cabelo, barba e blusa",w:"red"},
+    {id:"a3",t:"Conferir vitrine: sem buracos, produtos alinhados com identificação",w:"warn"},
+    {id:"a4",t:"Verificar estoque dos campeões de venda — avisar produção se necessário",w:"warn"},
+    {id:"a5",t:"Fazer briefing com a equipe: prioridades do dia e motivação"},
+  ]},
+  {id:"at",e:"💬",t:"Atendimento e Vendas",items:[
+    {id:"at1",t:"Acompanhar atendimentos e padronizar abordagem conforme método combinado"},
+    {id:"at2",t:"Itens de impulso posicionados no caixa: bebidas, velas, toppers, complementos",w:"warn"},
+    {id:"at3",t:"Equipe oferecendo adicionais: morango extra, chantilly, gelatto...",w:"warn"},
+    {id:"at4",t:"Monitorar WhatsApp e orientar condução das vendas"},
+    {id:"at5",t:"Circular pelas mesas: café quente, pedido correto, satisfação do cliente"},
+    {id:"at6",t:"Avisar clientes quando espera ultrapassar 20 minutos",w:"warn"},
+  ]},
+  {id:"op",e:"🏪",t:"Operação e Vitrine",items:[
+    {id:"op1",t:"Vitrine abastecida, alinhada e atrativa — verificar várias vezes ao dia",w:"warn"},
+    {id:"op2",t:"Verificar validade e aparência dos produtos em exposição",w:"warn"},
+    {id:"op3",t:"Supervisionar limpeza e organização da loja"},
+    {id:"op4",t:"Conferir apresentação pessoal das atendentes ao longo do dia",w:"red"},
+  ]},
+  {id:"fi",e:"💰",t:"Caixa e Financeiro",items:[
+    {id:"fi1",t:"Confirmar que todos os consumos foram registrados no caixa"},
+    {id:"fi2",t:"Realizar sangrias conforme procedimento"},
+    {id:"fi3",t:"Organizar caixa no envelope com boletos para envio ao ateliê/Carol"},
+    {id:"fi4",t:"Registrar faturamento e comparar com meta do dia"},
+  ]},
+  {id:"pr",e:"🎂",t:"Integração com Produção",items:[
+    {id:"pr1",t:"Comunicar produtos em falta ou alta demanda — campeões nunca podem faltar!",w:"warn"},
+    {id:"pr2",t:"Alertar sobre produtos próximos do vencimento na vitrine",w:"red"},
+    {id:"pr3",t:"Cobrar feedbacks de clientes às atendentes e repassar no grupo"},
+  ]},
+  {id:"eq",e:"👥",t:"Equipe",items:[
+    {id:"eq1",t:"Motivar e engajar o time durante o dia"},
+    {id:"eq2",t:"Anotar necessidades de treinamento para reportar à Carol"},
+    {id:"eq3",t:"Elaborar esboço de escala do fim de semana para aprovação da Carol (se aplicável)"},
+  ]},
+  {id:"fe",e:"🌙",t:"Fechamento",items:[
+    {id:"fe1",t:"Executar checklist de fechamento e atualizar se necessário"},
+    {id:"fe2",t:"Fechar caixa, organizar envelope com boletos e enviar ao ateliê/Carol"},
+    {id:"fe3",t:"Atualizar status do WhatsApp pensando nos dias de baixa venda"},
+    {id:"fe4",t:"Preencher indicadores e diário do dia"},
+    {id:"fe5",t:"Enviar resumo do dia para a Carol: faturamento, conversão e ocorrências"},
+  ]}
+];
+
+let st={};
+function sv(){try{localStorage.setItem("gcl_"+today(),JSON.stringify(st));}catch(e){}}
+function ld(){try{const d=localStorage.getItem("gcl_"+today());if(d)st=JSON.parse(d);}catch(e){}}
+function today(){return new Date().toISOString().split("T")[0];}
+
+function tots(){
+  let t=0,d=0;
+  S.forEach(s=>s.items.forEach(i=>{t++;if(st[i.id])d++;}));
+  return{t,d};
+}
+function updProg(){
+  const{t,d}=tots();
+  const p=t?Math.round(d/t*100):0;
+  document.getElementById("pf").style.width=p+"%";
+  document.getElementById("pl").textContent=p+"%";
+  document.getElementById("banner").classList.toggle("show",d===t&&t>0);
+}
+function updBdg(id){
+  const sec=S.find(s=>s.id===id);
+  const d=sec.items.filter(i=>st[i.id]).length,t=sec.items.length;
+  const b=document.getElementById("b-"+id);
+  b.textContent=d===t?"✓ Feito":d+"/"+t;
+  b.className="sec-badge "+(d===t?"bdg-d":"bdg-p");
+}
+function toggle(iid,sid){
+  st[iid]=!st[iid];sv();
+  document.getElementById("i-"+iid).classList.toggle("done",!!st[iid]);
+  updBdg(sid);updProg();
+}
+function togSec(id){
+  const el=document.getElementById("its-"+id),ch=document.getElementById("ch-"+id);
+  const o=el.classList.toggle("open");ch.classList.toggle("open",o);
+}
+function resetAll(){
+  if(!confirm("Iniciar novo dia? O checklist será zerado."))return;
+  st={};sv();
+  S.forEach(sec=>{
+    sec.items.forEach(it=>document.getElementById("i-"+it.id).classList.remove("done"));
+    updBdg(sec.id);
+  });
+  ["fat","tkt","ent","cmp","conv","diary"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
+  updProg();
+}
+function render(){
+  const now=new Date();
+  document.getElementById("dtlbl").textContent=now.toLocaleDateString("pt-BR",{weekday:"short",day:"numeric",month:"short"});
+  const c=document.getElementById("secs");
+  S.forEach((sec,i)=>{
+    const d=document.createElement("div");d.className="section";
+    d.innerHTML=`<div class="sec-hd" onclick="togSec('${sec.id}')">
+      <span class="sec-emoji">${sec.e}</span>
+      <span class="sec-title">${sec.t}</span>
+      <span class="sec-badge bdg-p" id="b-${sec.id}">0/${sec.items.length}</span>
+      <span class="chev${i===0?' open':''}" id="ch-${sec.id}">▼</span>
+    </div>
+    <div class="items${i===0?' open':''}" id="its-${sec.id}">
+      ${sec.items.map(it=>`
+        <div class="item${st[it.id]?' done':''}" id="i-${it.id}" onclick="toggle('${it.id}','${sec.id}')">
+          <div class="cb">${st[it.id]?'✓':''}</div>
+          <span class="itxt">${it.t}${it.w?<span class="tag tag-${it.w}">⚠️ atenção</span>:''}</span>
+        </div>`).join("")}
+    </div>`;
+    c.appendChild(d);updBdg(sec.id);
+  });
+  updProg();
+}
+ld();render();
+</script>
+</body>
+</html>
