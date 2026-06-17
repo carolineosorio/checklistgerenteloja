@@ -77,15 +77,29 @@ textarea::placeholder{color:#bca898}
     <div class="sec-hd" onclick="togSec('ab')">
       <span class="sec-emoji">🌅</span>
       <span class="sec-title">Abertura</span>
-      <span class="sec-badge bdg-p" id="b-ab">0/5</span>
+      <span class="sec-badge bdg-p" id="b-ab">0/4</span>
       <span class="chev open" id="ch-ab">▼</span>
     </div>
     <div class="items open" id="its-ab">
-      <div class="item" id="i-a1" onclick="toggle('a1','ab')"><div class="cb"></div><span class="itxt">Seguir checklist de abertura e atualizar se necessário</span></div>
-      <div class="item" id="i-a2" onclick="toggle('a2','ab')"><div class="cb"></div><span class="itxt">Verificar apresentação pessoal de cada atendente: hálito, cabelo, barba e blusa <span class="tag tag-red">⚠ atenção</span></span></div>
-      <div class="item" id="i-a3" onclick="toggle('a3','ab')"><div class="cb"></div><span class="itxt">Conferir vitrine: sem buracos, produtos alinhados com identificação <span class="tag tag-warn">⚠ atenção</span></span></div>
-      <div class="item" id="i-a4" onclick="toggle('a4','ab')"><div class="cb"></div><span class="itxt">Verificar estoque dos campeões de venda — avisar produção se necessário <span class="tag tag-warn">⚠ atenção</span></span></div>
-      <div class="item" id="i-a5" onclick="toggle('a5','ab')"><div class="cb"></div><span class="itxt">Fazer briefing com a equipe: prioridades do dia e motivação</span></div>
+      <div class="item" id="i-a1" onclick="toggle('a1','ab')"><div class="cb"></div><span class="itxt">Seguir checklist de abertura e atualizar frequentemente</span></div>
+      <div class="item" id="i-a2" onclick="toggle('a2','ab')"><div class="cb"></div><span class="itxt">Verificar apresentação pessoal de cada atendente: uniforme, crocs, cabelo, laço, make, unhas, acessórios discretos, touca e avental <span class="tag tag-red">⚠ atenção</span></span></div>
+      <div class="item" id="i-a3" onclick="toggle('a3','ab')"><div class="cb"></div><span class="itxt">Conferir vitrines: sem buracos, sem itens espalhados, tudo alinhado com identificação e datas <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-a4" onclick="toggle('a4','ab')"><div class="cb"></div><span class="itxt">Verificar estoque dos campeões de venda: duos 8 e 15F, caixinhas 25 docinhos, bolo pizza, fatia marta rocha, torta fria, empada de frango — comunicar produção se necessário <span class="tag tag-warn">⚠ atenção</span></span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hd" onclick="togSec('tt')">
+      <span class="sec-emoji">🔄</span>
+      <span class="sec-title">Troca de Turno</span>
+      <span class="sec-badge bdg-p" id="b-tt">0/4</span>
+      <span class="chev" id="ch-tt">▼</span>
+    </div>
+    <div class="items" id="its-tt">
+      <div class="item" id="i-tt1" onclick="toggle('tt1','tt')"><div class="cb"></div><span class="itxt">Briefing sobre acontecimentos: eventos, reservas e situações do dia — motivar a equipe a sempre cumprir o padrão estabelecido</span></div>
+      <div class="item" id="i-tt2" onclick="toggle('tt2','tt')"><div class="cb"></div><span class="itxt">Revisar uniformes da equipe no geral <span class="tag tag-red">⚠ atenção</span></span></div>
+      <div class="item" id="i-tt3" onclick="toggle('tt3','tt')"><div class="cb"></div><span class="itxt">Status do WhatsApp sempre atualizado com postagens de hora em hora sempre que possível <span class="tag tag-warn">⚠ atenção</span></span></div>
+      <div class="item" id="i-tt4" onclick="toggle('tt4','tt')"><div class="cb"></div><span class="itxt">Cobrar verificação do cardápio online para evitar erros <span class="tag tag-warn">⚠ atenção</span></span></div>
     </div>
   </div>
 
@@ -117,7 +131,7 @@ textarea::placeholder{color:#bca898}
       <div class="item" id="i-op1" onclick="toggle('op1','op')"><div class="cb"></div><span class="itxt">Vitrine abastecida, alinhada e atrativa — verificar várias vezes ao dia <span class="tag tag-warn">⚠ atenção</span></span></div>
       <div class="item" id="i-op2" onclick="toggle('op2','op')"><div class="cb"></div><span class="itxt">Verificar validade e aparência dos produtos em exposição <span class="tag tag-warn">⚠ atenção</span></span></div>
       <div class="item" id="i-op3" onclick="toggle('op3','op')"><div class="cb"></div><span class="itxt">Supervisionar limpeza e organização da loja</span></div>
-      <div class="item" id="i-op4" onclick="toggle('op4','op')"><div class="cb"></div><span class="itxt">Conferir apresentação pessoal das atendentes ao longo do dia <span class="tag tag-red">⚠ atenção</span></span></div>
+      <div class="item" id="i-op4" onclick="toggle('op4','op')"><div class="cb"></div><span class="itxt">Solicitar atualização da lista de compras conferindo com os colegas e retirando o que já chegou <span class="tag tag-warn">⚠ atenção</span></span></div>
     </div>
   </div>
 
@@ -203,8 +217,8 @@ textarea::placeholder{color:#bca898}
 </div>
 
 <script>
-var SECS = ['ab','at','op','fi','pr','eq','fe'];
-var COUNTS = {ab:5, at:6, op:4, fi:4, pr:3, eq:3, fe:5};
+var SECS = ['ab','tt','at','op','fi','pr','eq','fe'];
+var COUNTS = {ab:4, tt:4, at:6, op:4, fi:4, pr:3, eq:3, fe:5};
 var st = {};
 
 function today(){ return new Date().toISOString().split('T')[0]; }
